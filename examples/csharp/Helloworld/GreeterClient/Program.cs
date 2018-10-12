@@ -27,8 +27,13 @@ namespace GreeterClient
             var client = new Greeter.GreeterClient(channel);
             String user = "you";
 
-            var reply = client.SayHello(new HelloRequest { Name = user });
-            Console.WriteLine("Greeting: " + reply.Message);
+            try {
+                var reply = client.SayHello(new HelloRequest { Name = user });
+                Console.WriteLine("Greeting: " + reply.Message);
+            }
+            catch (Exception exception) {
+                Console.WriteLine(exception);
+            }
 
             channel.ShutdownAsync().Wait();
             Console.WriteLine("Press any key to exit...");
